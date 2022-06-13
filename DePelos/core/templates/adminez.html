@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administracion</title>
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/estiloss.css' %}">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"> 
+    <link rel="icon" href="{% static 'img/logoezz.png' %}" />
+
+
+
+</head>
+<body>
+
+        <!--Menu de navegacion-->
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          
+          <!-- logo -->
+          {% load static %}
+          <a class="navbar-brand" href="#">
+            <img src="{% static 'img/logoezz.png' %}" width="50" height="30" alt="logoBookStop">¡DePelos!
+          </a>
+          
+          <!-- enlaces -->
+          <div class="collapse navbar-collapse" id="opciones">   
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                  <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+                </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'somos' %}">Sobre Nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'galeria' %}">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+              </li>
+  
+            </ul>
+          </div>
+  
+      <!--Registrar barra de navegacion-->
+      {% if user.is_authenticated  %}
+
+      <div>
+        <a href="#" id="userDePelos">
+          Bienvenido @{{user.username}}
+        </a>
+      </div>
+
+      <div>
+        <a href="{%  url 'logout' %}" id="userDePelos" style="color: red">
+            <img src="{% static 'img/xez.png' %}" alt="userDePelos" width="20px">Cerrar Sessión.
+        </a>
+      </div>
+
+      {% else %}
+      <div>
+        <a href="{% url 'registro' %}" id="userDePelos">
+            <img src="{% static 'img/useeer.png' %}" alt="userDePelos" width="20px">Registrarse
+        </a>
+      </div>
+
+      <div>
+        <a href="{%  url 'login' %}" id="userDePelos">
+          <img src="{% static 'img/usermujer.png' %}" alt="userDePelos" width="20px">Iniciar Sesión
+        </a>
+      </div>
+      {% endif %}
+  
+        </nav>
+
+    <br><br>
+    <div class="container-fluid fondo color ">
+        <br><h1>Panel de Administracion</h1>
+        <p class="pt">Aca puedes administrar productos y usuarios</p><br>
+      </div>
+    <br><br>
+
+
+<!--Caja de index-->
+<div class="row jumbotron" id="Cajaindex">
+    <div class="col-lg-6">
+      <div class="div2">
+        <br><br><br><br><br>
+        <p class="pindex">
+            <hr>
+            {% if user.is_authenticated  %}
+            <h1>Bienvenido Administrador @{{user.username}}</h1><hr>
+          <br><br><br><br>
+          <h3>Administrar Usuarios:</h3>
+          <hr>
+          <a href="{% url 'mostrar_usuario' %}" class="btn btn-success">Mostrar Usuarios</a><hr><br><br><Br>
+
+
+          <h3>Administrar Productos:</h3><hr>
+          <a href="{% url 'mostrar_producto' %}" class="btn btn-success">Mostrar Productos</a><hr>
+
+
+          {% else %}
+          <h1>Ups........</h1><hr><br><br><br>
+          <h1>Debe Iniciar sessión como Administrador para tener acceso a este sitio.</h1><br><br><br><hr><br><br><br>
+          
+          <h1><a href="{% url 'login' %}" >Iniciar Sessión</a><br><br><Br><hr></h1>
+        
+          {% endif %}
+        </div>
+      </div>
+      
+  <div class="col-lg-6">
+    <img src="{% static 'img/perroezez.jpg' %}" class="imgduoc">
+  </div>
+  </div>
+  </div>
+  <br><br><hr><br><br>
+  
+
+
+
+
+    <footer>
+        <div class="row col-12">
+            <div class="col-lg-2">
+                <img src="{% static 'img/logoezz.png' %}" alt="logoDePelos" width="60px">
+            </div>
+            <div class="col-lg-1">
+                <a href="{% url 'index' %}" id="linkFooter"><strong>INICIO</strong></a>
+            </div>
+            <div class="col-lg-1">
+              <a href="{% url 'galeria' %}" id="linkFooter"><strong>PRODUCTOS</strong></a> <br>
+            </div>
+    
+            <div class="col-lg-2">
+                <a href="{% url 'somos' %}" id="linkFooter"><strong>SOBRE NOSOTROS</strong></a>
+                <br>
+                <br>
+            </div>
+    
+            <div class="col-lg-3">
+    
+                <strong>¡Síguenos En Redes!</strong>
+                <br><br>
+                <div class="row">
+                    <img src="{% static 'img/logofacebookez.png' %}" alt="" width="20px" height="20px"
+                        style="margin-right: 10px; margin-left: 15px;">
+                    <p>DePelosMascotas</p>
+                </div>
+                <div class="row">
+                    <img src="{% static 'img/instalogoez.png' %}" alt="" width="20px" height="20px"
+                        style="margin-right: 10px; margin-left: 15px;">
+                    <p>DePelosMascotas</p>
+                </div>
+                <div class="row">
+                    <img src="{% static 'img/twitterlogoez.png' %}" alt="" width="20px" height="20px"
+                        style="margin-right: 10px; margin-left: 15px;">
+                    <p>DePelosMascotas</p>
+                </div>
+    
+            </div>
+    
+    
+            <div class="col-lg-2">
+            
+                <a href="{% url 'contacto' %}" id="linkFooter"><strong>Contacto</strong></a>
+                <br><br>
+                <div class="row">
+                    <img src="{% static 'img/ubicacion.png' %}" alt="" width="20px" height="20px"
+                        style="margin-right: 10px; margin-left: 15px;">
+                    <p>DuocUC Sede maipu</p>
+                </div>
+                <div class="row">
+                    <img src="{% static 'img/phonez.png' %}" alt="" width="20px" height="20px"
+                        style="margin-right: 10px; margin-left: 15px;">
+                    <p>+569 5697 5821</p>
+                </div>
+                <div class="row">
+                    <img src="{% static 'img/gmail.png' %}" alt="" width="20px" height="20px"
+                        style="margin-right: 10px; margin-left: 15px;">
+                    <p>consulta@duocuc.cl</p>
+                </div>
+                <br><br>
+                <p>Carlos Leufumán</p>
+                <p>&copy; DePelos - 2022</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
+
+

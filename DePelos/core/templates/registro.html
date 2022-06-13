@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="icon" href="{% static 'img/logoezz.png' %}" />
+    <title>Registrar Usuario</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/estiloss.css' %}">
+
+<style> 
+
+    label.error {
+    color: red;
+    width: 500px;
+    font-size: 0.8em;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    }
+
+</style>
+
+
+    <script>
+
+        function CambiaColor(a)
+        {
+            a.style.background = "cyan";
+        }
+
+        function CambiaColor2(a)
+        {
+            a.style.background = "pink";
+        }
+
+        function CambiaColor3(a)
+        {
+            a.style.background = "yellow";
+        }
+
+        function CambiaColor4(a)
+        {
+            a.style.background = "magenta";
+        }
+
+        function CambiaColor5(a)
+        {
+            a.style.background = "orange";
+        }
+
+
+
+        $(function() 
+        {
+          $("#mi-formulario").validate({
+               rules: {
+                      email: {
+                          required: true,
+                          email: true
+                      },
+                      password: "required",
+                      fono: "required",                    
+                      password2: {
+                          required: true,
+                          equalTo: "#password"
+                      }   
+                      
+                  }, //rules
+              messages: {
+                  email: {
+                      required: 'Ingresa tu correo electrónico',
+                      email: 'Formato de correo no válido'
+                  },
+                  password: {
+                      required: 'Ingresa una contraseña',
+                      minlength: 'Caracteres insuficientes'
+                  },
+                  fono:{
+                      required: 'Ingrese un número de celular',
+                      minlength: 'Cantidad de digitos insuficiente'
+                  },
+                  password2: {
+                      required: 'Reingresa la contraseña',
+                      equalTo: 'Las contraseñas ingresadas no coinciden',
+                      minlength: 'Caracteres insuficientes'
+  
+                  }
+              }//messages
+          }); //$('#mi-formulario').validate
+      }); //function
+  
+  
+    </script>
+
+
+
+
+</head>
+<body>
+    <!--Menu de navegacion-->
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- logo -->
+        {% load static %}
+        <a class="navbar-brand" href="#">
+          <img src="{% static 'img/logoezz.png' %}" width="50" height="30" alt="logoBookStop">¡DePelos!
+        </a>
+        
+        <!-- enlaces -->
+        <div class="collapse navbar-collapse" id="opciones">   
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'somos' %}">Sobre Nosotros</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'galeria' %}">Productos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'contacto' %}">Contacto</a>
+            </li>
+
+          </ul>
+        </div>
+
+        <!--Registrar barra de navegacion-->
+        {% if user.is_authenticated  %}
+        <p  style="color: rgb(red, rgb(148, 155, 148), blue)">Bienvenido @{{user.username}} <img src="{% static 'img/useeer.png' %}" alt="userDePelos" width="20px"></p><p> |</p>
+        <a href="{%  url 'adminez' %}" class="btn btn-info">Administracion </a><p>|</p>
+        <a href="{%  url 'logout' %}" class="btn btn-danger">Cerrar Sesión</a>
+
+        {% else %}
+        <div>
+          <a href="{% url 'registro' %}" id="userDePelos">
+              <img src="{% static 'img/useeer.png' %}" alt="userDePelos" width="20px">Registrarse
+          </a>
+        </div>
+
+        <div>
+          <a href="{%  url 'login' %}" id="userDePelos">
+            <img src="{% static 'img/usermujer.png' %}" alt="userDePelos" width="20px">Iniciar Sesión
+          </a>
+        </div>
+        {% endif %}
+
+      </nav>
+    
+        <br>
+        <br>
+          <div class="container-fluid fondo color ">
+           <br><h1>Registrar</h1>
+           <p class="pt">Crea tu cuenta en DePelos para que no te pierdas ninguna novedad.</p><br>
+         </div>
+         <br><br>
+
+<!--Caja de index-->
+<div class="row jumbotron" id="Cajaindex">
+  <div class="col-lg-6">
+    <div class="div2">
+      <br><br><br>
+      <p class="pindex">
+        <hr><h1>Para poder crear una cuenta de usuario debe llenar los siguientes campos</h1><hr><br>
+
+        <!--Formulario ez-->
+        
+        <br>
+
+        <form name="mi-formulario" method="post" action="gracias.html" id="mi-formulario">
+
+            <div class="form-group">
+                <label for="nom">Nombre y Apellido:</label><br>
+                <input type="text" class="form-control" name="nom" id="nom" placeholder="Digite su nombre de usuario" onfocus="CambiaColor(this)"
+                title="Ingrese su nombre y apellido" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="correo">Ingrese su Email:</label><br>
+                <input type="email" class="form-control" name="email" id="email" placeholder="correo@dominio.com" onfocus="CambiaColor2(this)" required>
+            </div>
+            <br>
+           
+
+            <div class="form-group">
+                <label for="correo">Numero de Telefono:</label><br>
+                <input type="number" class="form-control" name="fono" id="fono" minlength="9" placeholder="Ingrese su numero telefonico" onfocus="CambiaColor3(this)" required>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="pass">Contraseña de Usuario:</label><br>
+                <input type="password" class="form-control" name="password" minlength="8" id="password" onfocus="CambiaColor4(this)"
+                placeholder="Digite su contraseña (Min 8 Caracteres)"
+                title="Debe contener como mínimo 8 caracteres"
+                required>
+            </div>
+            <br>
+
+            
+
+            <div class="form-group">
+                <label for="passR">Repita la contraseña:</label><br>
+                <input type="password" class="form-control" name="password2" id="password2" minlength="8" onfocus="CambiaColor5(this)"
+                placeholder="Digite nuevamente la contraseña"
+                title="Debe contener como mínimo 8 caracteres"
+                required>
+            </div>
+            <br>
+            
+
+            <label for="genero">¿Que Mascota tienes? (Opcional) </label><br>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" value="1" name="checkgen" id="checkgen1">
+                <label for="checkgen1" class="form-check-label" onmouseover="style.color = 'cyan'" onmouseout="style.color= 'white'">Perro</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" value="2" name="checkgen" id="checkgen2">
+                <label for="checkgen2" class="form-check-label" onmouseover="style.color = 'yellow'" onmouseout="style.color= 'white'">Gato</label>
+            </div>
+
+            <div class="form-check">
+                <input type="radio" class="form-check-input" value="3" name="checkgen" id="checkgen3">
+                <label for="checkgen3" class="form-check-label" onmouseover="style.color = 'red'" onmouseout="style.color= 'white'" >Otra</label>
+            </div>
+            <br><br>
+
+            <input type="submit" class="btn btn-success" value="Registrar">
+            <input type="reset" class="btn btn-danger" value="Limpiar">
+
+            <br><br>
+
+
+
+        </form>
+
+
+      </div>
+    </div>
+    
+<div class="col-lg-6">
+  <img src="{% static 'img/registroez.jpg' %}" class="imgduoc">
+</div>
+</div>
+</div>
+<br><br><hr><br>
+
+
+
+
+  <!--FOOTER-->
+  <footer>
+    <div class="row col-12">
+        <div class="col-lg-2">
+            <img src="{% static 'img/logoezz.png' %}" alt="logoDePelos" width="60px">
+        </div>
+        <div class="col-lg-1">
+            <a href="{% url 'index' %}" id="linkFooter"><strong>INICIO</strong></a>
+        </div>
+        <div class="col-lg-1">
+          <a href="{% url 'galeria' %}" id="linkFooter"><strong>PRODUCTOS</strong></a> <br>
+        </div>
+
+        <div class="col-lg-2">
+            <a href="{% url 'somos' %}" id="linkFooter"><strong>SOBRE NOSOTROS</strong></a>
+            <br>
+            <br>
+        </div>
+
+        <div class="col-lg-3">
+
+            <strong>¡Síguenos En Redes!</strong>
+            <br><br>
+            <div class="row">
+                <img src="{% static 'img/logofacebookez.png' %}" alt="" width="20px" height="20px"
+                    style="margin-right: 10px; margin-left: 15px;">
+                <p>DePelosMascotas</p>
+            </div>
+            <div class="row">
+                <img src="{% static 'img/instalogoez.png' %}" alt="" width="20px" height="20px"
+                    style="margin-right: 10px; margin-left: 15px;">
+                <p>DePelosMascotas</p>
+            </div>
+            <div class="row">
+                <img src="{% static 'img/twitterlogoez.png' %}" alt="" width="20px" height="20px"
+                    style="margin-right: 10px; margin-left: 15px;">
+                <p>DePelosMascotas</p>
+            </div>
+
+        </div>
+
+
+        <div class="col-lg-2">
+        
+            <a href="{% url 'contacto' %}" id="linkFooter"><strong>Contacto</strong></a>
+            <br><br>
+            <div class="row">
+                <img src="{% static 'img/ubicacion.png' %}" alt="" width="20px" height="20px"
+                    style="margin-right: 10px; margin-left: 15px;">
+                <p>DuocUC Sede maipu</p>
+            </div>
+            <div class="row">
+                <img src="{% static 'img/phonez.png' %}" alt="" width="20px" height="20px"
+                    style="margin-right: 10px; margin-left: 15px;">
+                <p>+569 5697 5821</p>
+            </div>
+            <div class="row">
+                <img src="{% static 'img/gmail.png' %}" alt="" width="20px" height="20px"
+                    style="margin-right: 10px; margin-left: 15px;">
+                <p>consulta@duocuc.cl</p>
+            </div>
+            <br><br>
+            <p>Carlos Leufumán</p>
+            <p>&copy; DePelos - 2022</p>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>  
+
+
+</body>
+</html>
+
